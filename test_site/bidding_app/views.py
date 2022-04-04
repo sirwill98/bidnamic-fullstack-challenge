@@ -32,3 +32,11 @@ def clientSignup(request):
     else:
         form = SignUpClientForm()
     return render(request, 'ClientSignup.html', {'form': form})
+
+
+
+def index(request):
+    if request.user.is_authenticated:
+        return render(request, 'index.html')
+    else:
+        return redirect('/accounts/login/')
