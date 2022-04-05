@@ -17,7 +17,7 @@ class ApplicationDataForm_part1(forms.ModelForm):
     def clean_date_of_birth(self):
         #raise forms.ValidationError("Must be 18 or older to submit a bid")
         form_data = self.cleaned_data['date_of_birth']
-        if form_data <= (datetime.now() - timedelta(days=18*365)).date():
+        if form_data > (datetime.now() - timedelta(days=18*365)).date():
             raise forms.ValidationError("Must be 18 or older to submit a bid")
         return form_data
 
@@ -32,6 +32,6 @@ class ApplicationDataForm_part2(forms.ModelForm):
     def clean_date_of_birth(self):
         #raise forms.ValidationError("Must be 18 or older to submit a bid")
         form_data = self.cleaned_data['date_of_birth']
-        if form_data <= (datetime.now() - timedelta(days=18*365)).date():
+        if form_data > (datetime.now() - timedelta(days=18*365)).date():
             raise forms.ValidationError("Must be 18 or older to submit a bid")
         return form_data

@@ -50,7 +50,7 @@ def view_bids(request):
 def multi_stage_bid_form(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            form = ApplicationDataForm_part1(request.POST)
+            #form = ApplicationDataForm_part1(request.POST)
             if 'title' in request.session:
                 #if form.is_valid():
                 form = ApplicationDataForm_part2(request.POST)
@@ -61,7 +61,7 @@ def multi_stage_bid_form(request):
                 form.instance.date_of_birth = datetime.strptime(request.session['date_of_birth'], "%Y/%m/%d")
                 if form.is_valid():
                     form.save()
-                    return render(request, 'index.html')
+                    return redirect('/')
             else:
                 form = ApplicationDataForm_part1(request.POST)
                 if form.is_valid():
