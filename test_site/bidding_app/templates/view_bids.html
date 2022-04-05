@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>View Current Bids</h2>
+  {% for item in query_results %}
+  {% if not item.active %}
+  <tr class="text-muted">
+    {% elif item.active %}
+  <tr class="text-primary">
+    {% endif %}
+    <td>
+        <small>{{ item }}</small>
+        {% if item.help_text %}
+        <small style="color: grey">{{ item.help_text }}</small>
+        {% endif %}
+        {% for error in item.errors %}
+        <p style="color: red">{{ error }}</p>
+        {% endfor %}
+    </td>
+    <td>
+        <small>{{ item.date_of_birth }}</small>
+        {% if item.help_text %}
+        <small style="color: grey">{{ item.help_text }}</small>
+        {% endif %}
+        {% for error in item.errors %}
+        <p style="color: red">{{ error }}</p>
+        {% endfor %}
+    </td>
+    <td>
+        <small>{{ item.company_name }}</small>
+        {% if item.help_text %}
+        <small style="color: grey">{{ item.help_text }}</small>
+        {% endif %}
+        {% for error in item.errors %}
+        <p style="color: red">{{ error }}</p>
+        {% endfor %}
+    </td>
+    <div class="job_actions">
+      {% include "jobs_actions.html"%}
+    </div>
+  </tr>
+  {% endfor %}
+{% endblock %}
