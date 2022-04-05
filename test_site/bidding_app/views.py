@@ -50,12 +50,10 @@ def view_bids(request):
 def multi_stage_bid_form(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            print("here")
             form = ApplicationDataForm_part1(request.POST)
             if 'title' in request.session:
                 #if form.is_valid():
                 form = ApplicationDataForm_part2(request.POST)
-                print("here2")
                 form.instance.user = request.user
                 form.instance.title = request.session['title']
                 form.instance.first_name = request.session['first_name']
@@ -67,7 +65,6 @@ def multi_stage_bid_form(request):
             else:
                 form = ApplicationDataForm_part1(request.POST)
                 if form.is_valid():
-                    print("here3")
                     fields = ['title', 'first_name', 'last_name']
                     for field in fields:
                         request.session[field] = form.cleaned_data.get(field)
@@ -76,7 +73,6 @@ def multi_stage_bid_form(request):
                     return render(request, 'create_bid.html', {'form': form})
         else:
             form = ApplicationDataForm_part1()
-            print("here1")
         return render(request, 'create_bid.html', {'form': form})
     else:
         response = redirect('/accounts/login/')

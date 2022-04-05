@@ -1,43 +1,101 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>View Current Bids</h2>
-  {% for item in query_results %}
-  {% if not item.active %}
-  <tr class="text-muted">
-    {% elif item.active %}
-  <tr class="text-primary">
-    {% endif %}
-    <td>
-        <small>{{ item }}</small>
+<h2>View Current Bids</h2>
+<table id="PageTable" class="table table-striped">
+  <thead>
+    <th>
+      <h6>Name</h6>
+    </th>
+    <th>
+      <h6>Date Of Birth</h6>
+    </th>
+    <th>
+      <h6>Company Name</h6>
+    </th>
+    <th>
+      <h6>Address</h6>
+    </th>
+    <th>
+      <h6>Telephone Number</h6>
+    </th>
+    <th>
+      <h6>Bidding Setting</h6>
+    </th>
+    <th>
+      <h6>Google Ads Account ID</h6>
+    </th>
+    {% for item in query_results %}
+    {% if not item.active %}
+    <tr class="text-muted">
+      {% elif item.active %}
+    <tr class="text-primary">
+      {% endif %}
+      <td>
+          <small>{{ item }}</small>
+          {% if item.help_text %}
+          <small style="color: grey">{{ item.help_text }}</small>
+          {% endif %}
+          {% for error in item.errors %}
+          <p style="color: red">{{ error }}</p>
+          {% endfor %}
+      </td>
+      <td>
+          <small>{{ item.date_of_birth }}</small>
+          {% if item.help_text %}
+          <small style="color: grey">{{ item.help_text }}</small>
+          {% endif %}
+          {% for error in item.errors %}
+          <p style="color: red">{{ error }}</p>
+          {% endfor %}
+      </td>
+      <td>
+          <small>{{ item.company_name }}</small>
+          {% if item.help_text %}
+          <small style="color: grey">{{ item.help_text }}</small>
+          {% endif %}
+          {% for error in item.errors %}
+          <p style="color: red">{{ error }}</p>
+          {% endfor %}
+      </td>
+      <td>
+          <small>{{ item.address }}</small>
+          {% if item.help_text %}
+          <small style="color: grey">{{ item.help_text }}</small>
+          {% endif %}
+          {% for error in item.errors %}
+          <p style="color: red">{{ error }}</p>
+          {% endfor %}
+      </td>
+      <td>
+          <small>{{ item.telephone }}</small>
+          {% if item.help_text %}
+          <small style="color: grey">{{ item.help_text }}</small>
+          {% endif %}
+          {% for error in item.errors %}
+          <p style="color: red">{{ error }}</p>
+          {% endfor %}
+      </td>
+      <td>
+        <small>{{ item.bidding_settings }}</small>
         {% if item.help_text %}
         <small style="color: grey">{{ item.help_text }}</small>
         {% endif %}
         {% for error in item.errors %}
         <p style="color: red">{{ error }}</p>
         {% endfor %}
-    </td>
-    <td>
-        <small>{{ item.date_of_birth }}</small>
+      </td>
+      <td>
+        <small>{{ item.google_ads_account_id }}</small>
         {% if item.help_text %}
         <small style="color: grey">{{ item.help_text }}</small>
         {% endif %}
         {% for error in item.errors %}
         <p style="color: red">{{ error }}</p>
         {% endfor %}
-    </td>
-    <td>
-        <small>{{ item.company_name }}</small>
-        {% if item.help_text %}
-        <small style="color: grey">{{ item.help_text }}</small>
-        {% endif %}
-        {% for error in item.errors %}
-        <p style="color: red">{{ error }}</p>
-        {% endfor %}
-    </td>
-    <div class="job_actions">
-      {% include "jobs_actions.html"%}
-    </div>
-  </tr>
-  {% endfor %}
+      </td>
+    </tr>
+    {% endfor %}
+  </thead>
+</table>
 {% endblock %}
