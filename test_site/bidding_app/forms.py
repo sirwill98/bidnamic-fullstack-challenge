@@ -1,15 +1,22 @@
-from tkinter import Widget
 from django import forms
-from .models import Client
+from .models import ClientApplicationData
 
 class DateInput(forms.DateInput):
     input_type = 'date'
 
-class SignUpClientForm(forms.ModelForm):
+class ApplicationDataForm_part1(forms.ModelForm):
     class Meta:
-        model = Client
-        fields = '__all__'
-        exclude = ['user']
+        model = ClientApplicationData
+        fields = 'title', 'first_name', 'last_name', 'date_of_birth'
+        exclude = ['added', 'updated', 'user']
         widgets = {
-            'date_of_birth': DateInput(),
-        }
+            'date_of_birth': DateInput()
+            }
+
+
+class ApplicationDataForm_part2(forms.ModelForm):
+    class Meta:
+        model = ClientApplicationData
+        fields = '__all__'
+        exclude = ['title', 'first_name', 'last_name', 
+        'date_of_birth', 'added', 'updated', 'user']
