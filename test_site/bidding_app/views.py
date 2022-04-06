@@ -61,6 +61,9 @@ def multi_stage_bid_form(request):
                 form.instance.date_of_birth = datetime.strptime(request.session['date_of_birth'], "%Y/%m/%d")
                 if form.is_valid():
                     form.save()
+                    session_keys = ["title", "first_name", "last_name", "date_of_birth"]
+                    for key in session_keys:
+                        del request.session[key]
                     return redirect('/')
             else:
                 form = ApplicationDataForm_part1(request.POST)
@@ -74,6 +77,17 @@ def multi_stage_bid_form(request):
         else:
             form = ApplicationDataForm_part1()
         return render(request, 'create_bid.html', {'form': form})
+    else:
+        response = redirect('/accounts/login/')
+        return response
+
+
+def delete_obj_view(request, id):
+    if request.user.is_authenticated:
+        ClientApplicationData.objects.filter(id=id).delete()
+        query_results = ClientApplicationData.objects.all().order_by('-added')
+        context = {"query_results": query_results}
+        return render(request, 'view_bids.html', context)
     else:
         response = redirect('/accounts/login/')
         return response

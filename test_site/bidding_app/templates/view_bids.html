@@ -94,6 +94,12 @@
         <p style="color: red">{{ error }}</p>
         {% endfor %}
       </td>
+      <td>
+        <form action="{% url 'delete-bid' id=item.id %}" method="POST" style="margin-bottom:0em;">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger" name="delete-bid" formmethod="post" Value="Delete Bid">Delete Bid</button>
+        </form>
+      </td>
     </tr>
     {% endfor %}
   </thead>

@@ -7,5 +7,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('log-out', views.logout, name='log-out'),
     path('view-bids', views.view_bids, name='view-bids'),
-    path('create-bid', views.multi_stage_bid_form, name='create-bid')
+    path('create-bid', views.multi_stage_bid_form, name='create-bid'),
+    path('delete-bid/<id>/', views.delete_obj_view, name='delete-bid')
     ]

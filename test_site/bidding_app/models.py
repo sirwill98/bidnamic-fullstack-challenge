@@ -1,6 +1,7 @@
 from django.utils.translation import gettext_lazy as _
 from django.db import models
 from django.contrib.auth.models import User
+from phonenumber_field.modelfields import PhoneNumberField
 
 class ClientApplicationData(models.Model):
     class TITLE_OPTIONS(models.TextChoices):
@@ -22,7 +23,7 @@ class ClientApplicationData(models.Model):
     date_of_birth = models.DateField()
     company_name = models.CharField(max_length=128)
     address = models.TextField()
-    telephone = models.CharField(max_length=16)
+    telephone = PhoneNumberField()
     bidding_settings = models.CharField(max_length=6, choices=BIDDING_SETTING.choices)
     google_ads_account_id = models.CharField(max_length=10) # needs validated
     added = models.DateTimeField(auto_now_add=True)
