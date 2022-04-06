@@ -2,7 +2,6 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import logout as django_logout
 from django.shortcuts import redirect, render
-from django.core.paginator import Paginator
 from datetime import datetime
 from .models import ClientApplicationData
 from .forms import ApplicationDataForm_part1, ApplicationDataForm_part2
@@ -50,9 +49,7 @@ def view_bids(request):
 def multi_stage_bid_form(request):
     if request.user.is_authenticated:
         if request.method == 'POST':
-            #form = ApplicationDataForm_part1(request.POST)
             if 'title' in request.session:
-                #if form.is_valid():
                 form = ApplicationDataForm_part2(request.POST)
                 form.instance.user = request.user
                 form.instance.title = request.session['title']
